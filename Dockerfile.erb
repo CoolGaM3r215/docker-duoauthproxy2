@@ -5,6 +5,7 @@ RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install <% image.vars['yum
     <%= pkg -%>
 <% end -%>
 
+
 # modified from https://github.com/jumanjihouse/docker-duoauthproxy/
 WORKDIR /src
 ADD https://dl.duosecurity.com/duoauthproxy-<%= image.vars['duoauthproxy_ver'] -%>-src.tgz /src/

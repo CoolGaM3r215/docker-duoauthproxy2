@@ -8,6 +8,7 @@ RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install  \
     perl \
     zlib-devel \
     diffutils
+
 # modified from https://github.com/jumanjihouse/docker-duoauthproxy/
 WORKDIR /src
 ADD https://dl.duosecurity.com/duoauthproxy-5.2.1-src.tgz /src/
@@ -21,7 +22,7 @@ RUN tar xzf duoauthproxy-*-src.tgz \
 FROM bcit/centos:7-latest
 
 LABEL maintainer="jesse@weisner.ca, chriswood.ca@gmail.com"
-LABEL build_id="1617313678"
+LABEL build_id="1617314033"
 
 RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install  \
     openssl
