@@ -1,5 +1,5 @@
 ---
-image_name: template_test
+image_name: duoauthproxy
 org_name: bcit
 labels:
   maintainer: "jesse@weisner.ca, chriswood.ca@gmail.com"
