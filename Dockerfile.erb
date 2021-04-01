@@ -28,4 +28,5 @@ RUN useradd -s /sbin/nologin duo \
  && mkdir -p /opt/duoauthproxy/log \
  && chown -R duo:duo /opt/duoauthproxy/log
 
+USER duo
 CMD ["/opt/duoauthproxy/bin/authproxy"]
