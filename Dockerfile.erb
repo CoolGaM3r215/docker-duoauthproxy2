@@ -1,9 +1,31 @@
-FROM bcit/centos:7-latest
+FROM bcit/centos:7-latest as build
 
-<%= snippet('labels', binding) -%>
-
+# from https://duo.com/docs/authproxy-reference#installation
 RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install <% image.vars['yum_build_deps'].each do |pkg| -%> \
     <%= pkg -%>
 <% end -%>
 
-CMD [ "init-loop" ]
+# modified from https://github.com/jumanjihouse/docker-duoauthproxy/
+WORKDIR /src
+ADD https://dl.duosecurity.com/duoauthproxy-<%= image.vars['duoauthproxy_ver'] -%>-src.tgz /src/
+RUN tar xzf duoauthproxy-*-src.tgz \
+ && cd duoauthproxy-*-src \
+ && make \ 
+ && useradd duo \
+ && cd duoauthproxy-build \
+ && ./install --install-dir=/opt/duoauthproxy --service-user=duo --log-group=duo --create-init-script=no
+
+FROM bcit/centos:7-latest
+
+<%= snippet('labels', binding) -%>
+
+RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install <% image.vars['yum_runtime_deps'].each do |pkg| -%> \
+    <%= pkg -%>
+<% end -%>
+
+COPY --from=build /opt/duoauthproxy/ /opt/duoauthproxy/
+RUN useradd -s /sbin/nologin duo \
+ && mkdir -p /opt/duoauthproxy/log \
+ && chown -R duo:duo /opt/duoauthproxy/log
+
+CMD ["/opt/duoauthproxy/bin/authproxy"]
