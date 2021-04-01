@@ -9,3 +9,10 @@ vars:
   tini_version: '0.19.0'
   de_version: '1.5'
   dockerize_version: '0.6.1'
+  yum_build_deps:
+    - 'gcc '
+    - 'make'
+    - 'libffi-devel'
+    - 'perl'
+    - 'zlib-devel'
+    - 'diffutils'
