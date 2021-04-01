@@ -3,12 +3,11 @@ image_name: duoauthproxy
 org_name: bcit
 labels:
   maintainer: "jesse@weisner.ca, chriswood.ca@gmail.com"
+suffixes:
+  - 'latest'
+  - '5.2-latest'
+  - '5.2.1-latest'
 vars:
-  version_tags:
-    - 'latest'
-  tini_version: '0.19.0'
-  de_version: '1.5'
-  dockerize_version: '0.6.1'
   yum_build_deps:
     - 'gcc '
     - 'make'
