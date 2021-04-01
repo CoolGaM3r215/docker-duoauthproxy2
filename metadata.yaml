@@ -16,3 +16,4 @@ vars:
     - 'perl'
     - 'zlib-devel'
     - 'diffutils'
+  duoauthproxy_ver: '5.2.1'
