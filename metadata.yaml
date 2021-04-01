@@ -16,4 +16,6 @@ vars:
     - 'perl'
     - 'zlib-devel'
     - 'diffutils'
+  yum_runtime_deps:
+    - 'openssl'
   duoauthproxy_ver: '5.2.1'
