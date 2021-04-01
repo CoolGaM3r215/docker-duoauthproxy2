@@ -21,7 +21,7 @@ RUN tar xzf duoauthproxy-*-src.tgz \
 FROM bcit/centos:7-latest
 
 LABEL maintainer="jesse@weisner.ca, chriswood.ca@gmail.com"
-LABEL build_id="1617312641"
+LABEL build_id="1617312955"
 
 RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install  \
     openssl
