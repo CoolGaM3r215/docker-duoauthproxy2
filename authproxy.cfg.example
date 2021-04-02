@@ -6,7 +6,9 @@
 
 ; MAIN: Include this section to specify global configuration options.
 ; Reference: https://duo.com/docs/authproxy_reference#main-section
-;[main]
+[main]
+log_stdout=true
+http_ca_certs_file=/etc/pki/tls/cert.pem
 
 
 ; CLIENTS: Include one or more of the following configuration sections.
