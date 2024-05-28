@@ -1,13 +1,11 @@
-FROM bcit/centos:7-latest as build
+FROM debian:bookworm-slim as build
 
 # from https://duo.com/docs/authproxy-reference#installation
-RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install  \
-    gcc  \
-    make \
-    libffi-devel \
+RUN apt-get -y install \
+    build-essential \
+    libffi-dev \
     perl \
-    zlib-devel \
-    diffutils
+    zlib1g-dev
 
 # modified from https://github.com/jumanjihouse/docker-duoauthproxy/
 WORKDIR /src
@@ -19,12 +17,9 @@ RUN tar xzf duoauthproxy-*-src.tgz \
  && cd duoauthproxy-build \
  && ./install --install-dir=/opt/duoauthproxy --service-user=duo --log-group=duo --create-init-script=no
 
-FROM bcit/centos:7-latest
+FROM debian:bookworm-slim
 
-LABEL maintainer="jesse@weisner.ca, chriswood.ca@gmail.com"
-LABEL build_id="1617314033"
-
-RUN yum -y --setopt tsflags=nodocs --setopt timeout=5 install  \
+RUN apt-get -y install  \
     openssl
 COPY --from=build /opt/duoauthproxy/ /opt/duoauthproxy/
 RUN useradd -s /sbin/nologin duo \
